@@ -2,26 +2,26 @@ kind: Deployment
 apiVersion: apps/v1
 metadata:
     labels:
-        app: Team404-microservice
+        app: team404-notfound-microservice
         stack: frontend
         source: demo
-    name: Team404-microservice
+    name: team404-notfound-microservice
     namespace: microservices
 spec:
     replicas: 3
     selector:
         matchLabels:
-            run: Team404-microservice
+            run: team404-notfound-microservice
     template:
         metadata:
             labels:
-                app: Team404-microservice
-                run: Team404-microservice
+                app: team404-notfound-microservice
+                run: team404-notfound-microservice
                 source: demo
         spec:
             containers:
-                -   image: 219099013464.dkr.ecr.us-west-2.amazonaws.com/Team404-microservice
-                    name: Team404-microservice
+                -   image: 219099013464.dkr.ecr.us-west-2.amazonaws.com/team404-notfound-microservice
+                    name: team404-notfound-microservice
                     ports:
                         -   name: web
                             containerPort: 8080
@@ -31,13 +31,13 @@ kind: Service
 apiVersion: v1
 metadata:
     labels:
-        app: Team404-microservice-service
-    name: Team404-microservice-service
+        app: team404-notfound-microservice-service
+    name: team404-notfound-microservice-service
     namespace: microservices
 spec:
     selector:
         source: demo
-        app: Team404-microservice
+        app: team404-notfound-microservice
     ports:
         -   name: web
             protocol: TCP
@@ -51,14 +51,15 @@ kind: Ingress
 metadata:
     annotations:
         nginx.ingress.kubernetes.io/rewrite-target: /$2
-    name: Team404-ingress
+    name: team404-notfound-ingress
     namespace: microservices
 spec:
     rules:
         -   http:
                 paths:
-                    -   path: /Team404(/|$)(.*)
+                    -   path: /team404-notfound(/|$)(.*)
                         backend:
-                            serviceName: Team404-microservice-service
+                            serviceName: team404-notfound-microservice-service
                             servicePort: 30201
+
 
